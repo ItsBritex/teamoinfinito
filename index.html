@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Te amo infinito</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #191919;
+            color: #ff4d4d;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+        }
+
+        #messages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            width: 90%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        .love-message {
+            font-size: 18px;
+            text-align: center;
+            padding: 10px;
+            background: #2a2a2a;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .love-message {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="messages"></div>
+
+    <script>
+        const container = document.getElementById('messages');
+        let messageCount = 0;
+
+        // Función para generar mensajes
+        function generateLoveMessages(count) {
+            for (let i = 0; i < count; i++) {
+                messageCount++;
+                const paragraph = document.createElement('div');
+                paragraph.classList.add('love-message');
+                paragraph.textContent = `${messageCount}. Te amo`;
+                container.appendChild(paragraph);
+            }
+        }
+
+        // Detectar cuando estás cerca del final de la página
+        window.addEventListener('scroll', () => {
+            const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+            if (scrollTop + clientHeight >= scrollHeight - 10) {
+                generateLoveMessages(20); // Generar más mensajes al llegar al final
+            }
+        });
+
+        // Generar los primeros 100 mensajes
+        generateLoveMessages(100);
+    </script>
+</body>
+</html>
